@@ -16,20 +16,18 @@ public class AddressService {
 		this.addressRepository = addressRepository;
 	}
 	
+	public Address getAddress(Integer id){
+		if(this.addressRepository.exists(id)){
+			return this.addressRepository.findOne(id);
+		}
+		return null;
+	}
+	
 	public Address createAddress(String line1,String line2,String county,String country,String postcode){
 		return addressRepository.save(new Address(line1, line2, county, country, postcode));
 	}
 	
 	public Address updateAddress(Address address){
-		/*Address currentAddress = this.addressRepository.findOne(address.getId());
-		System.out.println("Current Address is "+ currentAddress);
-		Address newAddress = currentAddress;
-		newAddress.setLine1(address.getLine1());
-		newAddress.setLine2(address.getLine2());
-		newAddress.setCounty(address.getCounty());
-		newAddress.setCountry(address.getCountry());
-		newAddress.setPostcode(address.getPostcode());
-		System.out.println("New Address is "+ newAddress);*/
 		return addressRepository.save(address);
 	}
 

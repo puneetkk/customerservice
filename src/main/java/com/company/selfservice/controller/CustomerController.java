@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.company.selfservice.controller.dto.RegisterCustomerDTO;
+import com.company.selfservice.domain.Address;
 import com.company.selfservice.domain.Customer;
 import com.company.selfservice.domain.User;
 import com.company.selfservice.services.CustomerService;
@@ -48,7 +49,7 @@ public class CustomerController {
 	
 	@RequestMapping(method=RequestMethod.POST, path="/register")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> registerCustomer(@RequestBody RegisterCustomerDTO registerCustomerObj){
+	public ResponseEntity<Customer> registerCustomer(@RequestBody RegisterCustomerDTO registerCustomerObj){
 		
 		System.out.println("Input Customer");
 		System.out.println(registerCustomerObj);
@@ -61,7 +62,8 @@ public class CustomerController {
 			.fromCurrentRequest().path("/{id}")
 			.buildAndExpand(customer.getId()).toUri();
 
-		return ResponseEntity.created(location).build();
+		//return ResponseEntity.created(location).build();
+		return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, path="/customers")

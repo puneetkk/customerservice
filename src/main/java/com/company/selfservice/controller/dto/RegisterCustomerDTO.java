@@ -75,4 +75,12 @@ public class RegisterCustomerDTO implements Serializable{
 	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("RegisterCustomerDTO [fName=").append(fName).append(", lName=").append(lName).append(", email=")
+				.append(email).append(", addresses=").append(addresses).append(", pwd=").append(pwd).append("]");
+		return builder.toString();
+	}
 }

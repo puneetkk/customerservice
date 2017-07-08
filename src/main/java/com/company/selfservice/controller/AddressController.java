@@ -45,8 +45,14 @@ public class AddressController {
 			.fromCurrentRequest().path("/{id}")
 			.buildAndExpand(address.getId()).toUri();
 
-		return ResponseEntity.created(location).build();
+		//return ResponseEntity.created(location).build();
+		return new ResponseEntity<Address>(address, HttpStatus.CREATED);
 		
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, path="/addresses/{id}")
+	public Address getAddress(@PathVariable("id") Integer id){
+		return this.addressService.getAddress(id);
 	}
 
 }
